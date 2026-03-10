@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import sys
 
+PYGAME_DETECT_AVX2=1
 
 table = pd.DataFrame(
     {
@@ -13,6 +15,13 @@ table = pd.DataFrame(
     }
 )
 
+def open_graph():
+    print('Running code via exec():')
+    with open("graphing.py", "r") as f:
+        code = f.read()
+        exec(code)
+def close_window():
+    sys.exit(0)
 extras = ["Okay", "Cancel"]
 from tkinter import *
 from tkinter import ttk
@@ -33,12 +42,6 @@ h = ttk.Entry(content)
 b = ttk.Entry(content)
 r = ttk.Entry(content)
 
-def get_input():
-    f_input = f.get()
-    g_input = g.get()
-    h_input = h.get()
-    b_input = b.get()
-    r_input = r.get()
 
 onevar = BooleanVar(value=True)
 twovar = BooleanVar(value=False)
@@ -47,8 +50,8 @@ threevar = BooleanVar(value=True)
 one = ttk.Checkbutton(content, text="One", variable=onevar, onvalue=True)
 two = ttk.Checkbutton(content, text="Two", variable=twovar, onvalue=True)
 three = ttk.Checkbutton(content, text="Three", variable=threevar, onvalue=True)
-ok = ttk.Button(content, text="Okay", command=get_input)
-cancel = ttk.Button(content, text="Cancel")
+ok = ttk.Button(content, text="Okay", command=open_graph)
+cancel = ttk.Button(content, text="Cancel", command=close_window)
 
 content.grid(column=0, row=0)
 #frame.grid(column=0, row=0, columnspan=3, rowspan=2)
